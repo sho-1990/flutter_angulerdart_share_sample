@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -29,20 +30,19 @@ class _HomeState extends State<Home> {
     return StreamBuilder(
       stream: _logic.itemStream,
       builder: (context, snapshot) {
-        debugPrint("load start");
         if (snapshot.hasError) {
           _showSnackBar(context);
           return Center(child: Text("error"),);
         }
         if (!snapshot.hasData) {
           _logic.loadCurrencies();
-          return Center(
-            child: CupertinoActivityIndicator()
-          );
+          if (defaultTargetPlatform == TargetPlatform.iOS) {
+            return Center(child: CupertinoActivityIndicator(),);
+          } else {
+            return Center(child: CircularProgressIndicator(),);
+          }
         }
-        debugPrint("load Data");
         List<Crypto> cryptoItems = snapshot.data;
-        debugPrint("load Data");
         return Container(
           child: Column(
             children: <Widget>[
