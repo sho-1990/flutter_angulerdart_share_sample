@@ -11,8 +11,8 @@ class CryptoListLogic {
   get itemStream => _itemStreamController.stream;
   get itemController => _itemStreamController;
 
-  CryptoListLogic() {
-    _repository = Injector().cryptoRepository;
+  CryptoListLogic(Injector injector) {
+    _repository = injector.cryptoRepository;
   }
 
   Future loadCurrencies() async {

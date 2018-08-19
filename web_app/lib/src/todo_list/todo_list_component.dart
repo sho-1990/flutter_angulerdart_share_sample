@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:core/core.dart';
 
 import 'todo_list_service.dart';
 
@@ -29,7 +30,13 @@ class TodoListComponent implements OnInit {
 
   @override
   Future<Null> ngOnInit() async {
-    items = await todoListService.getTodoList();
+    todoListService.stream.listen((List<Crypto> data) {
+      data.forEach((c) {
+        print(c);
+        items.add(c.priceUsd);
+      });
+    });
+    todoListService.loadCurrencies();
   }
 
   void add() {

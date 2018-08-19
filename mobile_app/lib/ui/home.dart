@@ -4,6 +4,7 @@ import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app/dependency_injection.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  CryptoListLogic _logic = CryptoListLogic();
+  CryptoListLogic _logic = CryptoListLogic(MInjector());
 
   final List<MaterialColor> _colors = [Colors.blue, Colors.indigo, Colors.red];
 
